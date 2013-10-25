@@ -12,7 +12,7 @@
   "Initialize the database and schedule the counter"
   []
   (db/init)
-  (job/schedule "counter" work, :every :second, :singleton false))
+  (job/schedule "counter" work, :every [2 :seconds], :singleton false))
 
 (defn stop
   "Stop the counter"

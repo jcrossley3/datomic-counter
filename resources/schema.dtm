@@ -14,6 +14,8 @@
   :db/ident :increment
   :db/fn #db/fn {:lang "clojure"
                  :params [db]
-                 :code "[{:db/id :counter
-                          :value (inc (:value (datomic.api/entity db :counter)))}]"}}
+                 :code "(let [v (:value (datomic.api/entity db :counter))]
+                          (println \"incrementing\" v)
+                          [{:db/id :counter
+                            :value (inc v)}])"}}
 ]
