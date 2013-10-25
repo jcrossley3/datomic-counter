@@ -1,17 +1,19 @@
 [
  {:db/id #db/id[:db.part/db]
-  :db/ident :counter/id
-  :db/valueType :db.type/keyword
-  :db/unique :db.unique/identity
-  :db/cardinality :db.cardinality/one
-  :db/doc "The id of a counter"
-  :db.install/_attribute :db.part/db}
-
- {:db/id #db/id[:db.part/db]
-  :db/ident :counter/value
+  :db/ident :value
   :db/valueType :db.type/long
   :db/cardinality :db.cardinality/one
   :db/doc "The current value of the counter" 
   :db.install/_attribute :db.part/db}
 
+ {:db/id #db/id [:db.part/user]
+  :db/ident :counter
+  :db/doc "The counter :)"}
+
+ {:db/id #db/id [:db.part/user]
+  :db/ident :increment
+  :db/fn #db/fn {:lang "clojure"
+                 :params [db]
+                 :code "[{:db/id :counter
+                          :value (inc (:value (datomic.api/entity db :counter)))}]"}}
 ]
