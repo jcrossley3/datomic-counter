@@ -11,8 +11,12 @@
 (defn start
   "Initialize the database and schedule the counter"
   []
-  (db/init)
-  (job/schedule "counter" work, :every [2 :seconds], :singleton false))
+  (try
+    (db/init)
+    (job/schedule "counter" work, :every [2 :seconds], :singleton false)
+    (catch Exception e
+      (println "Check the transactor, retrying in 10 seconds")
+      (future (Thread/sleep 10000) (start)))))
 
 (defn stop
   "Stop the counter"
