@@ -1,0 +1,17 @@
+[
+ {:db/id #db/id[:db.part/db]
+  :db/ident :counter/id
+  :db/valueType :db.type/keyword
+  :db/unique :db.unique/identity
+  :db/cardinality :db.cardinality/one
+  :db/doc "The id of a counter"
+  :db.install/_attribute :db.part/db}
+
+ {:db/id #db/id[:db.part/db]
+  :db/ident :counter/value
+  :db/valueType :db.type/long
+  :db/cardinality :db.cardinality/one
+  :db/doc "The current value of the counter" 
+  :db.install/_attribute :db.part/db}
+
+]
