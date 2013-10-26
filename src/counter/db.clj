@@ -10,11 +10,21 @@
 (def conn (delay (d/connect uri)))
 
 (defn init
-  "Create the database, load the schema, and initialize counter"
+  "Create the database, load the schema, initialize counter, and
+  define transaction function named :increment"
   []
   (when (d/create-database uri)
     @(d/transact @conn (read-string (slurp (io/resource "schema.dtm"))))
-    @(d/transact @conn [{:db/id :counter :value 0}])))
+    @(d/transact @conn [{:db/id :counter :value 0}
+                        {:db/id (d/tempid :db.part/user)
+                         :db/ident :increment
+                         :db/fn (d/function
+                                 {:lang "clojure"
+                                  :params '[db]
+                                  :code '(let [v (:value (d/entity db :counter))]
+                                           (println "incrementing" v)
+                                           [{:db/id :counter
+                                             :value (inc v)}])})}])))
 
 (defn value
   "The current value of the counter"
