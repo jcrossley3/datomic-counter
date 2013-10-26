@@ -1,6 +1,7 @@
+# Datomic Counter
 
 Deploy this app to the nodes in your Immutant cluster after overlaying
-the Hotrod modules on them. That is...
+the Hotrod modules on them.
 
 ## Usage
 
