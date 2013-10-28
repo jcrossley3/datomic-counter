@@ -22,7 +22,7 @@
                                  {:lang "clojure"
                                   :params '[db]
                                   :code '(let [v (:value (d/entity db :counter))]
-                                           (println "incrementing" v)
+                                           (println "inc" v)
                                            [{:db/id :counter
                                              :value (inc v)}])})}])))
 
