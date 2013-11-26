@@ -1,6 +1,7 @@
 (ns counter.core
   (:require [counter.db :as db]
-            [immutant.jobs :as job]))
+            [immutant.jobs :as job]
+            [clojure.tools.logging :as log]))
 
 (defn job
   "Fires on schedule to dump/increment counter"
@@ -16,7 +17,7 @@
     (db/init)
     (job/schedule "counter" job, :every [2 :seconds], :singleton false)
     (catch Exception e
-      (println "Check the transactor, retrying in 10 seconds")
+      (log/error e "Check transactor failings or version conflicts, retrying in 10 seconds")
       (future (Thread/sleep 10000) (start)))))
 
 (defn stop
