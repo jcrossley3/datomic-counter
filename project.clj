@@ -5,5 +5,5 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.5.1"]
                  [org.infinispan/infinispan-client-hotrod "6.0.0.CR1"]
-                 [com.datomic/datomic-pro "0.8.4218"]]
+                 [com.datomic/datomic-pro "0.9.4314"]]
   :immutant {:init counter.core/start})
